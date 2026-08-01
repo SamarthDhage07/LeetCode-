@@ -1,38 +1,43 @@
 class Solution {
-    public int maxDigitRange(int[] nums) {  
-        ArrayList <Integer> list = new ArrayList<>();
-        ArrayList <Integer> diff = new ArrayList<>();
-        int ans = 0;
-        int larg = Integer.MIN_VALUE;
-        int sum =0;
+    public int maxDigitRange(int[] nums) {
 
+        int maxRange = -1;
+        int sum = 0;
 
-        for(int i =0;i<nums.length;i++) {
-            list.clear() ;
-            int n = nums[i];
+        for (int num : nums) {
 
-            while(n != 0) {
-                list.add(n%10);
-                n = n/10;
+            int n = num;
+
+            if (n == 0) {
+                if (maxRange < 0) {
+                    maxRange = 0;
+                    sum = num;
+                } else if (maxRange == 0) {
+                    sum += num;
+                }
+                continue;
             }
-            Collections.sort(list);
 
-            diff.add(list.get(list.size()-1)-list.get(0));
+            int minDigit = 9;
+            int maxDigit = 0;
 
+            while (n > 0) {
+                int digit = n % 10;
+                minDigit = Math.min(minDigit, digit);
+                maxDigit = Math.max(maxDigit, digit);
+                n /= 10;
+            }
+
+            int range = maxDigit - minDigit;
+
+            if (range > maxRange) {
+                maxRange = range;
+                sum = num;
+            } else if (range == maxRange) {
+                sum += num;
+            }
         }
 
-        for(int i=0; i<diff.size();i++) {
-            if(diff.get(i) > larg ) {
-                larg = diff.get(i);
-            }
-        }
-
-        for(int i =0;i<nums.length;i++) {
-            if(diff.get(i) == larg) {
-                sum +=nums[i];
-            }
-        }
         return sum;
-        
     }
 }
