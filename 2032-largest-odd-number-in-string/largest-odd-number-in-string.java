@@ -10,10 +10,6 @@ class Solution {
             }
         }
 
-        if(idx == 0) {
-            return ans+num.charAt(0);
-        }
-
         for(int i =0 ;i<=idx;i++) {
             ans += num.charAt(i);
         }
