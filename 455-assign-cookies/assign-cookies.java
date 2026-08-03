@@ -4,11 +4,8 @@ class Solution {
         int i =0;
         int j =0;
         int count =0;
-
         Arrays.sort(g);
         Arrays.sort(s);
-
-
 
         while(i<g.length && j <s.length) {
             if(g[i] <= s[j] ) {
@@ -16,7 +13,7 @@ class Solution {
                 i++;
                 j++;
             }
-            else if(g[i]>s[j]) {
+            else{
                 j++;
             }
             
