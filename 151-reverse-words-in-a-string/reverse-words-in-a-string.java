@@ -2,28 +2,27 @@ class Solution {
     public String reverseWords(String s) {
 
         boolean isEnd = false;
-        int end = s.length()-1;
-        String ans = "";
-        int count =0;
+        int end = s.length() - 1;
+        StringBuilder ans = new StringBuilder();
 
-        for(int i = s.length()-1; i >=0 ;i--) {
-            if((s.charAt(i) != ' ') && isEnd == false) {
+        for (int i = s.length()-1;i>=0;i--) {
+
+            if (s.charAt(i) != ' ' && !isEnd) {
                 end = i;
                 isEnd = true;
-                if(count!=0){
-                    ans += " ";   
-                }
-                count=1;
+                if (ans.length() != 0)
+                    ans.append(" ");
             }
-            if((s.charAt(i) == ' ') && isEnd == true) {
-                int start = i+1;
+
+            if (s.charAt(i) == ' ' && isEnd) {
+                ans.append(s.substring(i +1, end+1));
                 isEnd = false;
-                ans += s.substring(start, end+1);  
             }
-            if(i == 0 && isEnd == true) {
-                ans += s.substring(0,end+1);
+            if (i == 0 && isEnd) {
+                ans.append(s.substring(0,end + 1));
             }
         }
-        return ans;
+
+        return ans.toString();
     }
 }
