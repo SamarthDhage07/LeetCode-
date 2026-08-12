@@ -11,27 +11,21 @@ class Solution {
             }
         }
 
-        char[] nums1 = secret.toCharArray();
-        char[] nums2 = guess.toCharArray();
+        int nums1[] = new int[10];
+        int nums2[] = new int[10];
 
-        Arrays.sort(nums1);
-        Arrays.sort(nums2);
-
-        int i = 0;
-        int j = 0;
-
-        while (i < nums1.length && j < nums2.length) {
-            if (nums1[i] == nums2[j]) {
-                i++;
-                j++;
-                Y++;
-            } else if (nums1[i] < nums2[j]) {
-                i++;
-            } else {
-                j++;
-            }
+        for(int i =0;i<secret.length();i++) {
+            nums1[secret.charAt(i)-'0']++;
+        }
+        for(int i =0;i<guess.length();i++) {
+            nums2[guess.charAt(i)-'0']++;
         }
 
+        for(int i =0;i<nums1.length;i++) {
+            if(nums1[i] >0 && nums2[i] >0) {
+                Y += Math.min(nums1[i], nums2[i]);
+            }
+        }
         Y -= X;
 
         return ans += "" + X + "A" + Y + "B";
