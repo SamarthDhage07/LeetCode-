@@ -7,15 +7,12 @@ class Solution {
 
         int i = 0;
 
-        // 1. Add all intervals before newInterval
         while (i < intervals.length &&
                intervals[i][1] < newInterval[0]) {
 
             ans.add(intervals[i]);
             i++;
         }
-
-        // 2. Merge all overlapping intervals
         while (i < intervals.length &&
                intervals[i][0] <= newInterval[1]) {
 
@@ -25,10 +22,7 @@ class Solution {
             i++;
         }
 
-        // Add merged newInterval
         ans.add(newInterval);
-
-        // 3. Add remaining intervals
         while (i < intervals.length) {
             ans.add(intervals[i]);
             i++;
